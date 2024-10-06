@@ -30,9 +30,9 @@ export async function getRoom(roomId: string) {
   });
 }
 
-// export async function deleteRoom(roomId: string) {
-//   await db.delete(room).where(eq(room.id, roomId));
-// }
+export async function deleteRoom(roomId: string) {
+  await db.delete(room).where(eq(room.id, roomId));
+}
 
 export async function createRoom(
   roomData: Omit<Room, "id" | "userId">,
@@ -45,11 +45,11 @@ export async function createRoom(
   return inserted[0];
 }
 
-// export async function editRoom(roomData: Room) {
-//   const updated = await db
-//     .update(room)
-//     .set(roomData)
-//     .where(eq(room.id, roomData.id))
-//     .returning();
-//   return updated[0];
-// }
+export async function editRoom(roomData: Room) {
+  const updated = await db
+    .update(room)
+    .set(roomData)
+    .where(eq(room.id, roomData.id))
+    .returning();
+  return updated[0];
+}
