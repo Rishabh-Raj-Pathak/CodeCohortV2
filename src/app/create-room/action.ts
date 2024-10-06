@@ -2,11 +2,12 @@
 
 import { createRoom } from "@/data-access/rooms";
 import { Room } from "@/db/schema";
-import { getSession } from "@/lib/auth";
+import { authConfig, getSession } from "@/lib/auth";
+import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 
 export async function createRoomAction(roomData: Omit<Room, "id" | "userId">) {
-  const session = await getSession();
+  const session = await getServerSession( authConfig);
 
   if (!session) {
     throw new Error("you must be logged in to create this room");
