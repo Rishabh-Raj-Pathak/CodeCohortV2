@@ -12,17 +12,17 @@ export async function getRooms(search: string | undefined) {
   return rooms;
 }
 
-// export async function getUserRooms() {
-//   const session = await getSession();
-//   if (!session) {
-//     throw new Error("User not authenticated");
-//   }
-//   const rooms = await db.query.room.findMany({
-//     where: eq(room.userId, session.user.id),
-//   });
+export async function getUserRooms() {
+  const session = await getSession();
+  if (!session) {
+    throw new Error("User not authenticated");
+  }
+  const rooms = await db.query.room.findMany({
+    where: eq(room.userId, session.user.id),
+  });
 
-//   return rooms;
-// }
+  return rooms;
+}
 
 export async function getRoom(roomId: string) {
   return await db.query.room.findFirst({
@@ -34,16 +34,16 @@ export async function getRoom(roomId: string) {
 //   await db.delete(room).where(eq(room.id, roomId));
 // }
 
-// export async function createRoom(
-//   roomData: Omit<Room, "id" | "userId">,
-//   userId: string
-// ) {
-//   const inserted = await db
-//     .insert(room)
-//     .values({ ...roomData, userId })
-//     .returning();
-//   return inserted[0];
-// }
+export async function createRoom(
+  roomData: Omit<Room, "id" | "userId">,
+  userId: string
+) {
+  const inserted = await db
+    .insert(room)
+    .values({ ...roomData, userId })
+    .returning();
+  return inserted[0];
+}
 
 // export async function editRoom(roomData: Room) {
 //   const updated = await db

@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import { AuthOptions, getServerSession, DefaultSession } from "next-auth";
+import { AuthOptions, DefaultSession, getServerSession } from "next-auth";
 import { Adapter } from "next-auth/adapters";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -21,10 +21,10 @@ export const authConfig = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-    })
+    }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token }) {
       const dbUser = await db.query.users.findFirst({
         where: (users, { eq }) => eq(users.email, token.email!),
       });
@@ -41,6 +41,8 @@ export const authConfig = {
       };
     },
     async session({ token, session }) {
+      console.log(process.env.GOOGLE_CLIENT_ID);
+      console.log("Session token:", token);
       if (token) {
         session.user = {
           id: token.id as string,
@@ -55,6 +57,6 @@ export const authConfig = {
   },
 } satisfies AuthOptions;
 
-export function getSession(){
-  return getServerSession();
+export function getSession() {
+  return getServerSession(authConfig);
 }

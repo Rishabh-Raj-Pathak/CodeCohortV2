@@ -22,7 +22,6 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useState } from "react";
 import { deleteAccountAction } from "./actions";
@@ -128,10 +127,11 @@ export function Header() {
         <div className="flex items-center gap-4">
           {isLoggedIn && <AccountDropdown />}
           {!isLoggedIn && (
-            <Button onClick={() => signIn()} variant="link">
+            <Button onClick={() => signIn() } variant="link">
               <LogInIcon className="mr-2" /> Sign In
             </Button>
           )}
+        
           <ModeToggle />
         </div>
       </div>

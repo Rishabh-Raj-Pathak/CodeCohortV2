@@ -27,7 +27,6 @@ const formSchema = z.object({
 
 export function CreateRoomForm() {
   const { toast } = useToast();
-
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -46,7 +45,7 @@ export function CreateRoomForm() {
       title: "Room Created",
       description: "Your room was successfully created",
     });
-    // router.push(`/rooms/${room.id}`);
+    router.push(`/rooms/${room.id}`);
   }
 
   return (
@@ -59,7 +58,7 @@ export function CreateRoomForm() {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="CodeCohort is the best" />
+                <Input {...field} placeholder="Dev Finder Is Awesome" />
               </FormControl>
               <FormDescription>This is your public room name.</FormDescription>
               <FormMessage />
@@ -96,7 +95,7 @@ export function CreateRoomForm() {
               <FormControl>
                 <Input
                   {...field}
-                  placeholder="https://github.com"
+                  placeholder="https://github.com/webdevcody/dev-finder"
                 />
               </FormControl>
               <FormDescription>
