@@ -7,18 +7,20 @@ import {
   useSpring,
   MotionValue,
 } from "framer-motion";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
-export const HeroParallax = ({
-  products,
-}: {
-  products: {
-    title: string;
-    link: string ;
-    thumbnail: string|any;
-  }[];
-}) => {
+interface Product {
+  title: string;
+  link: string;
+  thumbnail: StaticImageData; 
+}
+
+interface HeroParallaxProps {
+  products: Product[];
+}
+
+export const HeroParallax = ({ products }: HeroParallaxProps) => {
   const firstRow = products.slice(0, 5);
   const secondRow = products.slice(5, 10);
   const thirdRow = products.slice(10, 15);
@@ -54,6 +56,7 @@ export const HeroParallax = ({
     useTransform(scrollYProgress, [0, 0.2], [-700, 500]),
     springConfig
   );
+
   return (
     <div
       ref={ref}
@@ -67,7 +70,6 @@ export const HeroParallax = ({
           translateY,
           opacity,
         }}
-        className=""
       >
         <motion.div className="flex flex-row-reverse space-x-reverse space-x-20 mb-20">
           {firstRow.map((product) => (
@@ -108,7 +110,9 @@ export const Header = () => {
         Empower <br /> Developer Collaboration
       </h1>
       <p className="max-w-2xl text-base md:text-xl mt-8 dark:text-neutral-200 ">
-      Connect with developers worldwide, collaborate on real projects, and grow your skills by joining rooms based on your tech interests and GitHub projects.
+        Connect with developers worldwide, collaborate on real projects, and
+        grow your skills by joining rooms based on your tech interests and
+        GitHub projects.
       </p>
     </div>
   );
@@ -121,7 +125,7 @@ export const ProductCard = ({
   product: {
     title: string;
     link: string;
-    thumbnail: string;
+    thumbnail: StaticImageData; // Updated type for consistency
   };
   translate: MotionValue<number>;
 }) => {

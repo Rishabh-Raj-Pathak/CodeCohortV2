@@ -11,11 +11,19 @@ import img8 from "../../public/video-img8.png";
 import img9 from "../../public/video-img9.png";
 import img10 from "../../public/video-img10.png";
 import img11 from "../../public/video-img11.png";
+import { StaticImageData } from "next/image";
+
+interface Product {
+  title: string;
+  link: string;
+  thumbnail: StaticImageData; 
+}
 
 export function HeroParallaxDemo() {
+
   return <HeroParallax products={products} />;
 }
-export const products = [
+export const products:Product[] = [
   {
     title: "Moonbeam",
     link: "https://gomoonbeam.com",
