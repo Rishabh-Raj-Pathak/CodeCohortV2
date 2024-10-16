@@ -30,7 +30,7 @@ export default async function Home({
       </div>
 
       <div className="grid grid-cols-3 gap-4">
-        {rooms.map((room) => {
+        {rooms.map((room:any) => {
           return <RoomCard key={room.id} room={room} />;
         })}
       </div>
