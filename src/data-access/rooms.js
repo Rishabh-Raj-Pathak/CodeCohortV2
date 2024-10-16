@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 import { like } from "drizzle-orm";
 import { getSession } from "@/lib/auth";
 
-export async function getRooms(search: string | undefined) {
+export async function getRooms(search) {
   const where = search ? like(room.tags, `%${search}%`) : undefined;
   const rooms = await db.query.room.findMany({
     where,
@@ -24,7 +24,7 @@ export async function getUserRooms() {
   return rooms;
 }
 
-export async function getRoom(roomId: string) {
+export async function getRoom(roomId) {
   console.log(roomId)
   if (!roomId) {
     throw new Error("Invalid roomId");
@@ -35,13 +35,13 @@ export async function getRoom(roomId: string) {
   });
 }
 
-export async function deleteRoom(roomId: string) {
+export async function deleteRoom(roomId) {
   await db.delete(room).where(eq(room.id, roomId));
 }
 
 export async function createRoom(
-  roomData: Omit<Room, "id" | "userId">,
-  userId: string
+  roomData,
+  userId
 ) {
   const inserted = await db
     .insert(room)
@@ -50,7 +50,7 @@ export async function createRoom(
   return inserted[0];
 }
 
-export async function editRoom(roomData: Room) {
+export async function editRoom(roomData) {
   const updated = await db
     .update(room)
     .set(roomData)
