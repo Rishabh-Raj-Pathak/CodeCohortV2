@@ -50,7 +50,11 @@ export function CreateRoomForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 flex flex-col mx-auto w-[50%] p-5 rounded-xl border-2 border-gray-600"
+      >
+        <h1 className="text-4xl font-semibold ">Create Room</h1>
         <FormField
           control={form.control}
           name="name"
@@ -124,7 +128,7 @@ export function CreateRoomForm() {
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <Button className="w-[30%] flex justify-center items-center mx-auto" type="submit">Submit</Button>
       </form>
     </Form>
   );

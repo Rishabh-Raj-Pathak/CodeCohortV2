@@ -5,13 +5,12 @@ import Link from "next/link";
 import { DevFinderVideo } from "./video-player";
 import { splitTags } from "@/lib/utils";
 import { unstable_noStore } from "next/cache";
-
-export default async function RoomPage(props: { params: { roomId: string } }) {
+export default async function RoomPage(props: { params: { roomid: string } }) {
   unstable_noStore();
-  const roomId = props.params.roomId;
+  const { roomid } = props.params;
 
-  const room = await getRoom(roomId);
-
+  console.log("Room Id", roomid);
+  const room = await getRoom(roomid);
   if (!room) {
     return <div>No room of this ID found</div>;
   }
@@ -26,7 +25,7 @@ export default async function RoomPage(props: { params: { roomId: string } }) {
 
       <div className="col-span-1 p-4 pl-2">
         <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-4 flex flex-col gap-4">
-          <h1 className="text-base">{room?.name}</h1>
+          <h1 className="text-base">{room?.name || "untitled rooms"}</h1>
 
           {room.githubRepo && (
             <Link
@@ -40,9 +39,11 @@ export default async function RoomPage(props: { params: { roomId: string } }) {
             </Link>
           )}
 
-          <p className="text-base text-gray-600">{room?.description}</p>
+          <p className="text-base text-gray-600">
+            {room?.description || "untitled descp"}
+          </p>
 
-          <TagsList tags={splitTags(room.tags)} />
+          <TagsList tags={splitTags(room.tags || "untitle tags h bhai")} />
         </div>
       </div>
     </div>
