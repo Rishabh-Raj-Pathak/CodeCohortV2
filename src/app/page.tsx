@@ -4,7 +4,7 @@ import Link from "next/link";
 import { BackgroundBeamsWithCollisionDemo } from "../components/ui/BackgroundBeamsWithCollisionDemo";
 import { HeroScrollDemo } from "@/components/ui/HeroScrollDemo";
 import { HeroParallaxDemo } from "@/components/ui/HeroParallaxDemo";
-import { GlobeDemo } from "@/components/ui/GlobeDemo";
+
 import Footer from "@/components/ui/Footer";
 
 export default function LandingPage() {
