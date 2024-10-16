@@ -4,29 +4,21 @@ import { AuthOptions, DefaultSession, getServerSession } from "next-auth";
 import { Adapter } from "next-auth/adapters";
 import GoogleProvider from "next-auth/providers/google";
 
-declare module "next-auth" {
-  interface Session extends DefaultSession {
-    user: {
-      id: string;
-    } & DefaultSession["user"];
-  }
-}
-
 export const authConfig = {
-  adapter: DrizzleAdapter(db) as Adapter,
+  adapter: DrizzleAdapter(db),
   session: {
     strategy: "jwt",
   },
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
   callbacks: {
     async jwt({ token }) {
       const dbUser = await db.query.users.findFirst({
-        where: (users, { eq }) => eq(users.email, token.email!),
+        where: (users, { eq }) => eq(users.email, token.email),
       });
 
       if (!dbUser) {
@@ -45,7 +37,7 @@ export const authConfig = {
       console.log("Session token:", token);
       if (token) {
         session.user = {
-          id: token.id as string,
+          id: token.id,
           name: token.name,
           email: token.email,
           image: token.picture,
@@ -55,7 +47,7 @@ export const authConfig = {
       return session;
     },
   },
-} satisfies AuthOptions;
+};
 
 export function getSession() {
   return getServerSession(authConfig);
