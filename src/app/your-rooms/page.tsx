@@ -5,9 +5,19 @@ import { UserRoomCard } from "./user-room-card";
 import { unstable_noStore } from "next/cache";
 import Image from "next/image";
 
+interface Room {
+  id: string;
+  userId: string;
+  name: string;
+  description: string;
+  tags: string;
+  githubRepo: string;
+}
+
 export default async function YourRoomsPage() {
   unstable_noStore();
-  const rooms = await getUserRooms();
+  const rooms:Room[] = await getUserRooms();
+
 
   return (
     <main className="min-h-screen p-16">
@@ -19,7 +29,7 @@ export default async function YourRoomsPage() {
       </div>
 
       <div className="grid grid-cols-3 gap-4">
-        {rooms.map((room) => {
+        {rooms.map((room:Room) => {
           return <UserRoomCard key={room.id} room={room} />;
         })}
       </div>
