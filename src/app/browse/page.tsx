@@ -5,6 +5,14 @@ import { SearchBar } from "./search-bar";
 import { RoomCard } from "./room-cards";
 import { unstable_noStore } from "next/cache";
 import Image from "next/image";
+interface Room {
+  id: string;
+  userId: string;
+  name: string;
+  description: string;
+  tags: string;
+  githubRepo: string;
+}
 
 export default async function Home({
   searchParams,
@@ -14,7 +22,8 @@ export default async function Home({
   };
 }) {
   unstable_noStore();
-  const rooms = await getRooms(searchParams.search);
+  const rooms: Room[] = await getRooms(searchParams.search); // Explicit typing for rooms
+  console.log("Hello", rooms);
 
   return (
     <main className="min-h-screen p-16">
@@ -30,7 +39,7 @@ export default async function Home({
       </div>
 
       <div className="grid grid-cols-3 gap-4">
-        {rooms.map((room:any) => {
+        {rooms.map((room: Room) => {
           return <RoomCard key={room.id} room={room} />;
         })}
       </div>
