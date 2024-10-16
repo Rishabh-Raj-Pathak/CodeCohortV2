@@ -4,6 +4,8 @@ import * as schema from "./schema";
 import postgres from "postgres";
 
 
+let db;
+
 if (process.env.NODE_ENV === "production") {
   db = drizzle(postgres(process.env.DATABASE_URL), { schema });
 } else {
