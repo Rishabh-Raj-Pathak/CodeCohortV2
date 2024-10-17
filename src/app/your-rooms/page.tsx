@@ -9,15 +9,14 @@ interface Room {
   id: string;
   userId: string;
   name: string;
-  description: string;
+  description: string | null;
   tags: string;
-  githubRepo: string;
+  githubRepo: string | null;
 }
 
 export default async function YourRoomsPage() {
   unstable_noStore();
-  const rooms:Room[] = await getUserRooms();
-
+  const rooms: Room[] = await getUserRooms();
 
   return (
     <main className="min-h-screen p-16">
@@ -29,7 +28,7 @@ export default async function YourRoomsPage() {
       </div>
 
       <div className="grid grid-cols-3 gap-4">
-        {rooms.map((room:Room) => {
+        {rooms.map((room: Room) => {
           return <UserRoomCard key={room.id} room={room} />;
         })}
       </div>

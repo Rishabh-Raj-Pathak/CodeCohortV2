@@ -9,9 +9,9 @@ interface Room {
   id: string;
   userId: string;
   name: string;
-  description: string;
+  description: string | null;
   tags: string;
-  githubRepo: string;
+  githubRepo: string | null;
 }
 
 export default async function Home({
