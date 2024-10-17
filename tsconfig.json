@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/db/index.js", "src/data-access/rooms.js", "src/data-access/users.js", "src/lib/auth.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/db/index.ts", "src/data-access/rooms.ts", "src/data-access/users.ts", "src/lib/auth.ts"],
   "exclude": ["node_modules"]
 }
