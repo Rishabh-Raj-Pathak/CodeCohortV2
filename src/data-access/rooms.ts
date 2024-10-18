@@ -25,6 +25,11 @@ export async function getUserRooms() {
 }
 
 export async function getRoom(roomId: string) {
+  console.log(roomId)
+  if (!roomId) {
+    throw new Error("Invalid roomId");
+  }
+
   return await db.query.room.findFirst({
     where: eq(room.id, roomId),
   });
