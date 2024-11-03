@@ -21,9 +21,13 @@ const apiKey = process.env.NEXT_PUBLIC_GET_STREAM_API_KEY!;
 
 export function DevFinderVideo({ room }: { room: Room }) {
   const session = useSession();
-  const [client, setClient] = useState<StreamVideoClient | null>(null);
+  const [videoclient, setvideoClient] = useState<StreamVideoClient | null>(null);
   const [call, setCall] = useState<Call | null>(null);
   const router = useRouter();
+
+  if (!session.data) {
+    return;
+  }
 
   useEffect(() => {
     if (!room) return;
@@ -31,7 +35,7 @@ export function DevFinderVideo({ room }: { room: Room }) {
       return;
     }
     const userId = session.data.user.id;
-    const client = new StreamVideoClient({
+    const vclient = new StreamVideoClient({
       apiKey,
       user: {
         id: userId,
@@ -40,35 +44,35 @@ export function DevFinderVideo({ room }: { room: Room }) {
       },
       tokenProvider: () => generateTokenAction(),
     });
-    const call = client.call("default", room.id);
+    const call = vclient.call("default", room.id);
     call.join({ create: true });
-    setClient(client);
+    setvideoClient(vclient);
     setCall(call);
 
     return () => {
       call
         .leave()
-        .then(() => client.disconnectUser())
+        .then(() => vclient.disconnectUser())
         .catch(console.error);
     };
   }, [session, room]);
 
   return (
-    client &&
+    videoclient  &&
     call && (
-      <StreamVideo client={client}>
-        <StreamTheme>
-          <StreamCall call={call}>
-            <SpeakerLayout />
-            <CallControls
-              onLeave={() => {
-                router.push("/");
-              }}
-            />
-            <CallParticipantsList onClose={() => undefined} />
-          </StreamCall>
-        </StreamTheme>
-      </StreamVideo>
+        <StreamVideo client={videoclient}>
+          <StreamTheme>
+            <StreamCall call={call}>
+              <SpeakerLayout />
+              <CallControls
+                onLeave={() => {
+                  router.push("/");
+                }}
+              />
+              <CallParticipantsList onClose={() => undefined} />
+            </StreamCall>
+          </StreamTheme>
+        </StreamVideo>
     )
   );
 }

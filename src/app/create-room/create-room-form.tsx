@@ -23,6 +23,7 @@ const formSchema = z.object({
   description: z.string().min(1).max(250),
   githubRepo: z.string().min(1).max(50),
   tags: z.string().min(1).max(50),
+  password: z.string().min(6).max(50),
 });
 
 export function CreateRoomForm() {
@@ -62,7 +63,7 @@ export function CreateRoomForm() {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="Dev Finder Is Awesome" />
+                <Input {...field} placeholder="Room Name" />
               </FormControl>
               <FormDescription>This is your public room name.</FormDescription>
               <FormMessage />
@@ -99,7 +100,7 @@ export function CreateRoomForm() {
               <FormControl>
                 <Input
                   {...field}
-                  placeholder="https://github.com/webdevcody/dev-finder"
+                  placeholder="https://github.com/codecohort"
                 />
               </FormControl>
               <FormDescription>
@@ -122,6 +123,23 @@ export function CreateRoomForm() {
               <FormDescription>
                 List your programming languages, frameworks, libraries so people
                 can find you content
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input {...field} placeholder="Room Password" type="password" />
+              </FormControl>
+              <FormDescription>
+                Set a password if you want to restrict access to this room.
               </FormDescription>
               <FormMessage />
             </FormItem>

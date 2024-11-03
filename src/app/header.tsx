@@ -2,6 +2,7 @@
 
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 import { signIn, signOut, useSession } from "next-auth/react";
 import {
   DropdownMenu,
@@ -9,7 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { DeleteIcon, LogInIcon, LogOutIcon } from "lucide-react";
+import { DeleteIcon, LogInIcon, LogOutIcon, UserRoundPen } from "lucide-react";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
@@ -26,9 +27,9 @@ import {
 import { useState } from "react";
 import { deleteAccountAction } from "./actions";
 import LetterPullup from "@/components/ui/letter-pullup";
-import { TbUserSearch } from "react-icons/tb";
 
 function AccountDropdown() {
+  const router = useRouter();
   const session = useSession();
   const [open, setOpen] = useState(false);
 
@@ -40,7 +41,7 @@ function AccountDropdown() {
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone. This will permanently remove your
-              account and any data your have.
+              account and any data you have.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -69,6 +70,9 @@ function AccountDropdown() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
+          <DropdownMenuItem onClick={() => router.push('/profile')}>
+            <UserRoundPen className="mr-2" /> Profile
+          </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() =>
               signOut({
@@ -104,10 +108,10 @@ export function Header() {
           className="flex gap-2 items-center text-xl font-bold no-underline"
         >
           {/* <Image
-            src="/icon.png"
-            width="60"
+            src="/logo.png"
+            width="80"
             height="60"
-            alt="the application icon of a magnifying glass"
+            alt="the application icon"
           /> */}
           <LetterPullup words={"CodeCohort"} delay={0.05} />
           
@@ -118,7 +122,7 @@ export function Header() {
         <nav className="flex gap-8 items-center">
   {isLoggedIn && (
     <>
-      {/* Browse Link with Globe Icon */}
+
       <Link
         className="flex items-center text-black dark:text-gray-400 dark:hover:text-white hover:text-gray-700 transition-colors duration-200 ease-in-out"
         href="/browse"
@@ -140,7 +144,6 @@ export function Header() {
         <span className="ml-3">Browse</span>
       </Link>
 
-      {/* Your Rooms Link with Home Icon */}
       <Link
         className="flex items-center text-black dark:text-gray-400 dark:hover:text-white hover:text-gray-700 transition-colors duration-200 ease-in-out"
         href="/your-rooms"
@@ -156,17 +159,37 @@ export function Header() {
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            d="M10.5 21.75v-3.75h3v3.75m-8.25 0h13.5c1.035 0 1.875-.84 1.875-1.875v-8.25c0-.621-.252-1.217-.7-1.65L13.5 3.375c-.72-.68-1.78-.68-2.5 0L2.575 10.975c-.448.433-.7 1.029-.7 1.65v8.25c0 1.035.84 1.875 1.875 1.875z"
+            d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
           />
         </svg>
         <span className="ml-3">Your Rooms</span>
       </Link>
+      <Link
+        className="flex items-center text-black dark:text-gray-400 dark:hover:text-white hover:text-gray-700 transition-colors duration-200 ease-in-out"
+        href="/recommendations"
+      >
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"
+          />
+
+
+        </svg>
+
+        <span className="ml-3">Recommendations</span>
+      </Link>
     </>
   )}
 </nav>
-
-
-
 
         <div className="flex items-center">
           {isLoggedIn && <AccountDropdown />}

@@ -12,6 +12,7 @@ interface Room {
   description: string | null;
   tags: string;
   githubRepo: string | null;
+  password: string | null;
 }
 
 export default async function Home({
@@ -22,7 +23,7 @@ export default async function Home({
   };
 }) {
   unstable_noStore();
-  const rooms: Room[] = await getRooms(searchParams.search); // Explicit typing for rooms
+  const rooms: Room[] = await getRooms(searchParams.search); 
   console.log("Hello", rooms);
 
   return (

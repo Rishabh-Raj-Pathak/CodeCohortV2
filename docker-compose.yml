@@ -1,11 +1,11 @@
 version: "3.9"
 services:
-  codecohort-db:
+  codecoho-db:
     image: postgres
     restart: always
-    container_name: codecohort-db
+    container_name: codecoho-db
     ports:
-      - 5432:5432
+      - 5434:5432
     environment:
       POSTGRES_PASSWORD: example
       PGDATA: /data/postgres

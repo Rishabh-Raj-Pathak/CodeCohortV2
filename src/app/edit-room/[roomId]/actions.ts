@@ -5,6 +5,7 @@ import { Room } from "@/db/schema";
 import { getSession } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import bcrypt from "bcryptjs";
 
 export async function editRoomAction(roomData: Omit<Room, "userId">) {
   const session = await getSession();
@@ -19,7 +20,11 @@ export async function editRoomAction(roomData: Omit<Room, "userId">) {
     throw new Error("User not authorized");
   }
 
-  await editRoom({ ...roomData, userId: room.userId });
+  const hashedPassword = roomData.password
+    ? await bcrypt.hash(roomData.password, 10)
+    : null;
+
+  await editRoom({ ...roomData, password: hashedPassword, userId: room.userId });
 
   revalidatePath("/your-rooms");
   revalidatePath(`/edit-room/${roomData.id}`);

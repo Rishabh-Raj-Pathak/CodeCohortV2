@@ -9,6 +9,7 @@ export async function getRooms(search: string | undefined) {
   const rooms = await db.query.room.findMany({
     where,
   });
+  console.log(rooms);
   return rooms;
 }
 
@@ -35,6 +36,16 @@ export async function getRoom(roomId: string) {
   });
 }
 
+export async function getAllRooms(roomId: string) {
+  console.log(roomId)
+  if (!roomId) {
+    throw new Error("Invalid roomId");
+  }
+  return await db.query.room.findMany({
+    where: eq(room.id, roomId),
+  });
+}
+
 export async function deleteRoom(roomId: string) {
   await db.delete(room).where(eq(room.id, roomId));
 }
@@ -51,10 +62,22 @@ export async function createRoom(
 }
 
 export async function editRoom(roomData: Room) {
+  const updateData: Partial<Room> = {
+    name: roomData.name,
+    description: roomData.description,
+    githubRepo: roomData.githubRepo,
+    tags: roomData.tags,
+  };
+
+  if (roomData.password) {
+    updateData.password = roomData.password;
+  }
+
   const updated = await db
     .update(room)
-    .set(roomData)
+    .set(updateData)
     .where(eq(room.id, roomData.id))
     .returning();
+
   return updated[0];
 }

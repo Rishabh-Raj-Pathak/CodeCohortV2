@@ -36,7 +36,7 @@ const Footer = () => {
             </div>
             <div className="flex flex-row space-x-8 items-center justify-between">
               <a
-                href="https://github.com/Rishabh-Raj-Pathak/codeclan"
+                href="https://github.com/Rishabh-Raj-Pathak/codecohort"
                 target="blank"
               >
                 <svg
@@ -54,8 +54,8 @@ const Footer = () => {
                     gradientUnits="userSpaceOnUse"
                     spreadMethod="reflect"
                   >
-                    <stop offset="0" stop-color="#6dc7ff" />
-                    <stop offset="1" stop-color="#e6abff" />
+                    <stop offset="0" stopColor="#6dc7ff" />
+                    <stop offset="1" stopColor="#e6abff" />
                   </linearGradient>
                   <path
                     fill="url(#KpzH_ttTMIjq8dhx1zD2pa)"
@@ -70,8 +70,8 @@ const Footer = () => {
                     gradientUnits="userSpaceOnUse"
                     spreadMethod="reflect"
                   >
-                    <stop offset="0" stop-color="#1a6dff" />
-                    <stop offset="1" stop-color="#c822ff" />
+                    <stop offset="0" stopColor="#1a6dff" />
+                    <stop offset="1" stopColor="#c822ff" />
                   </linearGradient>
                   <path
                     fill="url(#KpzH_ttTMIjq8dhx1zD2pb)"

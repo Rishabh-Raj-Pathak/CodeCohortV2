@@ -5,6 +5,7 @@ import {
   primaryKey,
   integer,
   uuid,
+  jsonb,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "@auth/core/adapters";
 import { sql } from "drizzle-orm";
@@ -73,6 +74,23 @@ export const room = pgTable("room", {
   description: text("description"),
   tags: text("tags").notNull(),
   githubRepo: text("githubRepo"),
+  password: text("password"),
+});
+
+export const userRoomInteractions = pgTable("user_room_interactions", {
+  id: uuid("id")
+    .default(sql`gen_random_uuid()`)
+    .notNull()
+    .primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  roomId: uuid("roomId")
+    .notNull()
+    .references(() => room.id, { onDelete: "cascade" }),
+  visitedTags: text("visitedTags").notNull(), 
+  frequency: integer("frequency").default(1).notNull(),
 });
 
 export type Room = typeof room.$inferSelect;
+export type User = typeof users.$inferInsert;

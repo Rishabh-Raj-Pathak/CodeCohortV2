@@ -24,6 +24,7 @@ const formSchema = z.object({
   description: z.string().min(1).max(250),
   githubRepo: z.string().min(1).max(50),
   tags: z.string().min(1).max(50),
+  password: z.string().max(50).optional(),
 });
 
 export function EditRoomForm({ room }: { room: Room }) {
@@ -36,6 +37,7 @@ export function EditRoomForm({ room }: { room: Room }) {
       description: room.description ?? "",
       githubRepo: room.githubRepo ?? "",
       tags: room.tags,
+      password: "",
     },
   });
 
@@ -43,6 +45,7 @@ export function EditRoomForm({ room }: { room: Room }) {
     await editRoomAction({
       id: params.roomId as string,
       ...values,
+      password: values.password || null,
     });
     toast({
       title: "Room Updated",
@@ -120,6 +123,23 @@ export function EditRoomForm({ room }: { room: Room }) {
               <FormDescription>
                 List your programming languages, frameworks, libraries so people
                 can find you content
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input {...field} placeholder="Enter new password or leave blank" type="password" />
+              </FormControl>
+              <FormDescription>
+                Optional: Leave blank to remove or reset the password.
               </FormDescription>
               <FormMessage />
             </FormItem>
