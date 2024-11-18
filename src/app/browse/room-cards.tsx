@@ -13,7 +13,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Room } from "@/db/schema";
-import { GithubIcon, Lock, LockKeyhole, LockOpen } from "lucide-react";
+import { GithubIcon, LockKeyhole, LockOpen } from "lucide-react";
 import { TagsList } from "@/components/tags-list";
 import { splitTags } from "@/lib/utils";
 import { useSession } from "next-auth/react";

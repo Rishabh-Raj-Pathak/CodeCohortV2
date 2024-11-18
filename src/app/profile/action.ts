@@ -5,7 +5,6 @@ import { getRoom } from "@/data-access/rooms";
 import { getUserById } from "@/data-access/users";
 import { authConfig } from "@/lib/auth";
 import { getServerSession } from "next-auth";
-import { getSession } from "@/lib/auth";
 
 export async function getUser(){
   const session = await getServerSession(authConfig);
@@ -47,7 +46,6 @@ export async function fetchRoomFromRoomId(){
       rooms.map(async (room) => await getRoom(room.roomId)))
 
     console.log(roomDetailsArray);
-    // const roomDetails = roomDetailsArray.flat(); 
     return roomDetailsArray;
   }catch(error){
     console.error("Failed to fetch top rooms:", error);

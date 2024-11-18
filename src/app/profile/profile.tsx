@@ -1,4 +1,4 @@
-"use client"; // Mark this as a Client Component
+"use client";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -21,7 +21,6 @@ export default function Profile({ user, roomHistory }: { user: any; roomHistory:
 
   return (
     <>
-      {/* Delete Account Confirmation Dialog */}
       <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -65,7 +64,6 @@ export default function Profile({ user, roomHistory }: { user: any; roomHistory:
           </div>
         </div>
 
-        {/* Edit Profile and Contact Buttons */}
         <div className="flex justify-center space-x-4 mt-4">
           <Button asChild>
             <Link href={`/edit-profile/${user.id}`}>Edit Profile</Link>
@@ -75,7 +73,6 @@ export default function Profile({ user, roomHistory }: { user: any; roomHistory:
           </Button>
         </div>
 
-        {/* Sign Out and Delete Account Buttons */}
         <div className="flex justify-center space-x-4 mt-4">
           <Button onClick={() => signOut({ callbackUrl: "/" })} variant="outline">
             Sign Out
@@ -85,7 +82,6 @@ export default function Profile({ user, roomHistory }: { user: any; roomHistory:
           </Button>
         </div>
 
-        {/* Room History Section */}
         <section className="pt-8 px-4 md:px-6 max-w-3xl mx-auto space-y-6 mb-8 pb-8">
           <h2 className="text-xl font-semibold text-center">Room History</h2>
           <div className="border border-gray-200 rounded-lg p-4">

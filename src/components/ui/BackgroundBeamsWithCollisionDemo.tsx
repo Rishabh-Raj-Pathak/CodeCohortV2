@@ -2,8 +2,6 @@
 import React from "react";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { Button } from "./button";
-import { Router } from "next/router";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { TypewriterEffectDemo } from "./TypewriterEffectDemo.tsx";
 

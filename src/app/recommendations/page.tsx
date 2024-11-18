@@ -1,5 +1,5 @@
 import { unstable_noStore } from "next/cache";
-import { fetchTopRooms, getTags } from "./action";
+import { fetchTopRooms } from "./action";
 import { RoomCard } from "@/app/browse/room-cards";
 interface Room {
   id: string;

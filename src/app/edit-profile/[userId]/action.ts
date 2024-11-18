@@ -2,7 +2,6 @@
 
 import { editUser, getUserById } from "@/data-access/users";
 import { User } from "@/db/schema";
-import { users } from "@/db/schema"; // Import User type from your schema
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 

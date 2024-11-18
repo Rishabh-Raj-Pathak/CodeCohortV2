@@ -5,11 +5,11 @@ import Link from "next/link";
 import { DevFinderVideo } from "./video-player";
 import { splitTags } from "@/lib/utils";
 import { unstable_noStore } from "next/cache";
-export default async function RoomPage({params} : { params: { roomid: string } })  {
+export default async function RoomPage({params} : { params: { roomId: string } })  {
   unstable_noStore();
   const props = await params;
-  console.log(props);
-  const roomId = props.roomid;
+  const roomId = props.roomId;
+
 
   const room = await getRoom(roomId);
 

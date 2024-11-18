@@ -13,7 +13,7 @@ import {
   StreamVideoClient,
 } from "@stream-io/video-react-sdk";
 import { useSession } from "next-auth/react";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { generateTokenAction } from "./action";
 import { useRouter } from "next/navigation";
 

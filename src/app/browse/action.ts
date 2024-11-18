@@ -1,6 +1,5 @@
 "use server"
 
-import { getRooms } from "@/data-access/rooms";
 import { db } from "@/db";
 import { userRoomInteractions } from "@/db/schema";
 import { eq, and } from "drizzle-orm";
