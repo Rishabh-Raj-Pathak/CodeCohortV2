@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Room } from "@/db/schema";
+// import { Room } from "@/db/schema";
 import { GithubIcon, PencilIcon, TrashIcon } from "lucide-react";
 import { TagsList } from "@/components/tags-list";
 import { splitTags } from "@/lib/utils";
@@ -25,7 +25,15 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { deleteRoomAction } from "./actions";
-
+interface Room {
+  id: string;
+  userId: string;
+  name: string;
+  description: string | null;
+  tags: string;
+  githubRepo: string | null;
+  password?: string | null; // Optional or nullable
+}
 export function UserRoomCard({ room }: { room: Room }) {
   return (
     <Card>

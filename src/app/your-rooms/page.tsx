@@ -6,6 +6,7 @@ import { unstable_noStore } from "next/cache";
 import Image from "next/image";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 
+// Add password property to the Room interface
 interface Room {
   id: string;
   userId: string;
@@ -13,6 +14,7 @@ interface Room {
   description: string | null;
   tags: string;
   githubRepo: string | null;
+  password?: string | null; // Optional or nullable
 }
 
 export default async function YourRoomsPage() {
@@ -24,7 +26,7 @@ export default async function YourRoomsPage() {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl">Your Rooms</h1>
         <Button asChild>
-          <RainbowButton>
+          <RainbowButton color="">
             <Link href="/create-room">Create Room</Link>
           </RainbowButton>
         </Button>
@@ -44,7 +46,6 @@ export default async function YourRoomsPage() {
             height="200"
             alt="no data image"
           />
-
           <h2 className="text-2xl">You have no rooms</h2>
         </div>
       )}
