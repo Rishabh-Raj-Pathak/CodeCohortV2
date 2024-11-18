@@ -5,6 +5,7 @@ import { SearchBar } from "./search-bar";
 import { RoomCard } from "./room-cards";
 import { unstable_noStore } from "next/cache";
 import Image from "next/image";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 interface Room {
   id: string;
   userId: string;
@@ -28,10 +29,12 @@ export default async function Home({
 
   return (
     <main className="min-h-screen p-16">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl">Find Dev Rooms</h1>
+      <div className="flex justify-between">
+        <h1 className="text-2xl">Find Dev Rooms</h1>
         <Button asChild>
-          <Link href="/create-room">Create Room</Link>
+          
+          <RainbowButton><Link href="/create-room">Create Room</Link></RainbowButton>
+          
         </Button>
       </div>
 

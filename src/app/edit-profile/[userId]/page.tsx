@@ -16,7 +16,6 @@ export default async function EditUserPage({
 
   return (
     <div className="container flex flex-col  mx-auto pt-12 pb-24">
-        <h1 className="text-4xl font-bold">Edit Room</h1>
         <EditUserForm user={user} />
     </div>
   );

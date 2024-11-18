@@ -4,6 +4,7 @@ import { getUserRooms } from "@/data-access/rooms";
 import { UserRoomCard } from "./user-room-card";
 import { unstable_noStore } from "next/cache";
 import Image from "next/image";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 
 interface Room {
   id: string;
@@ -23,7 +24,9 @@ export default async function YourRoomsPage() {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl">Your Rooms</h1>
         <Button asChild>
-          <Link href="/create-room">Create Room</Link>
+          <RainbowButton>
+            <Link href="/create-room">Create Room</Link>
+          </RainbowButton>
         </Button>
       </div>
 
@@ -43,10 +46,6 @@ export default async function YourRoomsPage() {
           />
 
           <h2 className="text-2xl">You have no rooms</h2>
-
-          <Button asChild>
-            <Link href="/create-room">Create Room</Link>
-          </Button>
         </div>
       )}
     </main>

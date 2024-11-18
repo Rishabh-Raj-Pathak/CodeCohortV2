@@ -23,7 +23,7 @@ const formSchema = z.object({
   description: z.string().min(1).max(250),
   githubRepo: z.string().min(1).max(50),
   tags: z.string().min(1).max(50),
-  password: z.string().min(6).max(50),
+  password: z.string().min(6).max(50).optional(),
 });
 
 export function CreateRoomForm() {

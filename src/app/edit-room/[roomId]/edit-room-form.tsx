@@ -55,13 +55,16 @@ export function EditRoomForm({ room }: { room: Room }) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8 flex flex-col mx-auto w-[50%] p-5 rounded-xl border-2 border-gray-600">
+                <h1 className="text-4xl font-bold">Edit Room</h1>
+
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel >Name</FormLabel>
               <FormControl>
                 <Input {...field} placeholder="Dev Finder Is Awesome" />
               </FormControl>
@@ -146,7 +149,7 @@ export function EditRoomForm({ room }: { room: Room }) {
           )}
         />
 
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="w-[30%] flex justify-center items-center mx-auto">Submit</Button>
       </form>
     </Form>
   );

@@ -13,7 +13,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Room } from "@/db/schema";
-import { GithubIcon, Lock, LockOpen } from "lucide-react";
+import { GithubIcon, Lock, LockKeyhole, LockOpen } from "lucide-react";
 import { TagsList } from "@/components/tags-list";
 import { splitTags } from "@/lib/utils";
 import { useSession } from "next-auth/react";
@@ -83,7 +83,7 @@ export function RoomCard({ room }: { room: Room }) {
       <CardHeader>
         <div className="absolute top-2 right-2">
           <Tooltip text={room.password ? "Room is password-protected" : "Room has no password"}>
-            {room.password && <Lock className="text-2xl" />} { !room.password && <LockOpen className="text-2xl" />}
+            {room.password && <LockKeyhole color="#f56161" />}{ !room.password && <LockOpen color="#3e77ea" />}
           </Tooltip>
         </div>
         <CardTitle>{room.name}</CardTitle>
