@@ -25,10 +25,7 @@ export function DevFinderVideo({ room }: { room: Room }) {
   const [call, setCall] = useState<Call | null>(null);
   const router = useRouter();
 
-  if (!session.data) {
-    return;
-  }
-
+  
   useEffect(() => {
     if (!room) return;
     if (!session.data) {
@@ -48,7 +45,11 @@ export function DevFinderVideo({ room }: { room: Room }) {
     call.join({ create: true });
     setvideoClient(vclient);
     setCall(call);
-
+    
+    if (!session.data) {
+      return;
+    }
+    
     return () => {
       call
         .leave()

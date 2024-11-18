@@ -5,6 +5,7 @@ import { Button } from "./button";
 import { Router } from "next/router";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { TypewriterEffectDemo } from "./TypewriterEffectDemo.tsx";
 
 export function BackgroundBeamsWithCollisionDemo() {
   const router = useRouter();
@@ -21,7 +22,8 @@ export function BackgroundBeamsWithCollisionDemo() {
         </div>
 
         <h2 className="text-4xl relative z-20  text-center text-black dark:text-white font-sans tracking-tight">
-          The Ultimate Developer Collaboration Platform{" "}
+          <TypewriterEffectDemo/>
+          {/* The Ultimate Developer Collaboration Platform{" "} */}
         </h2>
         <div>
           <h2 className="text-xl z-20 flex justify-center items-center px-[280px] text-center text-black font-sans tracking-tight dark:text-gray-500 mt-2">
