@@ -64,6 +64,7 @@ export function RoomCard({ room }: { room: Room }) {
   };
 
   const handlePasswordSubmit = async () => {
+    console.log(room);
     if (room.password) {
       const isPasswordCorrect = await bcrypt.compare(password, room.password);
       if (!isPasswordCorrect) {
