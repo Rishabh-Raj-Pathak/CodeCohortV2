@@ -6,19 +6,34 @@ import { getUserById } from "@/data-access/users";
 import { authConfig } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 
-export async function getUser(){
+// export async function getUser(){
+//   const session = await getServerSession(authConfig);
+//   if (!session) {
+//     throw new Error("Not authenticated");
+//   }
+
+//   try{
+//     const user = getUserById(session.user.id);
+//     return user;
+//   }catch(error){
+//     throw new Error("Failed to fetch user by Id");
+//   }
+// }
+export async function getUser() {
   const session = await getServerSession(authConfig);
   if (!session) {
-    throw new Error("Not authenticated");
+    return null; // Return null if not authenticated
   }
 
-  try{
-    const user = getUserById(session.user.id);
+  try {
+    const user = await getUserById(session.user.id); // Await the promise
     return user;
-  }catch(error){
-    throw new Error("Failed to fetch user by Id");
+  } catch (error) {
+    console.error("Failed to fetch user by Id:", error);
+    return null; // Return null on error
   }
 }
+
 
 export async function getUserRoomHistory(){
   const session = await getServerSession(authConfig);

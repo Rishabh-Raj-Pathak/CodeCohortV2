@@ -16,28 +16,40 @@ import {
 } from "@/components/ui/alert-dialog";
 import { deleteAccountAction } from "../actions";
 import Image from "next/image";
+
+// Define the User interface
 interface User {
   id: string;
-  name?: string;
+  name?: string | null;
   email?: string;
-  image?: string;
+  image?: string | null;
 }
 
+// Define the Room interface, including optional fields
 interface Room {
   id: string;
   name: string;
-  githubRepo: string;
+  githubRepo: string | null;
   tags: string;
+  description?: string | null;
+  userId?: string;
+  password?: string | null;
 }
 
+// Profile component that takes user and roomHistory as props
 export default function Profile({
   user,
   roomHistory,
 }: {
   user: User;
-  roomHistory: Room[];
+  roomHistory: (Room | undefined)[];
 }) {
   const [open, setOpen] = useState(false);
+
+  // Filter out undefined values from roomHistory
+  const validRoomHistory = roomHistory.filter(
+    (room): room is Room => room !== undefined
+  );
 
   return (
     <>
@@ -111,9 +123,9 @@ export default function Profile({
         <section className="pt-8 px-4 md:px-6 max-w-3xl mx-auto space-y-6 mb-8 pb-8">
           <h2 className="text-xl font-semibold text-center">Room History</h2>
           <div className="border border-gray-200 rounded-lg p-4">
-            {roomHistory && roomHistory.length > 0 ? (
+            {validRoomHistory && validRoomHistory.length > 0 ? (
               <ul className="space-y-2">
-                {roomHistory.map((room, index) => (
+                {validRoomHistory.map((room, index) => (
                   <li
                     key={index}
                     className="p-3 rounded-lg border-b last:border-none flex items-center justify-between"
@@ -122,7 +134,7 @@ export default function Profile({
                       <div className="flex">
                         <p className="text-lg font-medium">{room.name}</p>
                         <p className="font-medium ml-4">
-                          <Link href={room.githubRepo}>
+                          <Link href={room.githubRepo ?? "#"}>
                             <svg
                               className="h-6 w-6 text-gray-500"
                               viewBox="0 0 24 24"
