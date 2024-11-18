@@ -40,14 +40,20 @@ export function CreateRoomForm() {
     },
   });
 
-  async function onSubmit(values: any) {
-    const room = await createRoomAction(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const normalizedValues = {
+      ...values,
+      password: values.password ?? null, 
+    };
+    
+    const room = await createRoomAction(normalizedValues);
     toast({
       title: "Room Created",
       description: "Your room was successfully created",
     });
     router.push(`/rooms/${room.id}`);
   }
+  
 
   return (
     <Form {...form}>
