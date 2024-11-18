@@ -6,6 +6,7 @@ import { RoomCard } from "./room-cards";
 import { unstable_noStore } from "next/cache";
 import Image from "next/image";
 import { RainbowButton } from "@/components/ui/rainbow-button";
+
 interface Room {
   id: string;
   userId: string;
@@ -24,18 +25,16 @@ export default async function Home({
   };
 }) {
   unstable_noStore();
-  const rooms: Room[] = await getRooms(searchParams.search); 
+  const rooms: Room[] = await getRooms(searchParams.search);
   console.log("Hello", rooms);
 
   return (
     <main className="min-h-screen p-16">
       <div className="flex justify-between">
         <h1 className="text-2xl">Find Dev Rooms</h1>
-        <Button asChild>
-          
-          <RainbowButton><Link href="/create-room">Create Room</Link></RainbowButton>
-          
-        </Button>
+        <RainbowButton color="">
+          <Link href="/create-room">Create Room</Link>
+        </RainbowButton>
       </div>
 
       <div className="mb-8">
