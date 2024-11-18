@@ -1,6 +1,7 @@
 import { unstable_noStore } from "next/cache";
 import { fetchTopRooms } from "./action";
 import { RoomCard } from "@/app/browse/room-cards";
+import Image from "next/image";
 interface Room {
   id: string;
   userId: string;
@@ -27,7 +28,7 @@ export default async function Home() {
           })
         ) : (
           <div className="flex flex-col gap-4 justify-center items-center mt-24">
-            <img
+            <Image
               src="/no-data.svg"
               width="200"
               height="200"

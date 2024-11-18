@@ -15,6 +15,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { deleteAccountAction } from "../actions";
+import Image from "next/image";
 
 export default function Profile({ user, roomHistory }: { user: any; roomHistory: any[] }) {
   const [open, setOpen] = useState(false);
@@ -48,7 +49,7 @@ export default function Profile({ user, roomHistory }: { user: any; roomHistory:
           <div className="px-4 space-y-6 md:px-6">
             <header className="space-y-4 text-center">
               <div className="flex flex-col items-center space-y-4">
-                <img
+                <Image
                   src={user.image ?? "/default-image.png"}
                   alt="Avatar"
                   width="150"
