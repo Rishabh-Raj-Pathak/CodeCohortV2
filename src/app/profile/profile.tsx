@@ -16,8 +16,27 @@ import {
 } from "@/components/ui/alert-dialog";
 import { deleteAccountAction } from "../actions";
 import Image from "next/image";
+interface User {
+  id: string;
+  name?: string;
+  email?: string;
+  image?: string;
+}
 
-export default function Profile({ user, roomHistory }: { user: any; roomHistory: any[] }) {
+interface Room {
+  id: string;
+  name: string;
+  githubRepo: string;
+  tags: string;
+}
+
+export default function Profile({
+  user,
+  roomHistory,
+}: {
+  user: User;
+  roomHistory: Room[];
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -27,7 +46,8 @@ export default function Profile({ user, roomHistory }: { user: any; roomHistory:
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently remove your account and any data you have.
+              This action cannot be undone. This will permanently remove your
+              account and any data you have.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -58,7 +78,9 @@ export default function Profile({ user, roomHistory }: { user: any; roomHistory:
                   style={{ aspectRatio: "1 / 1", objectFit: "cover" }}
                 />
                 <div className="space-y-1.5">
-                  <h1 className="text-2xl font-bold">{user.name || "User Name"}</h1>
+                  <h1 className="text-2xl font-bold">
+                    {user.name || "User Name"}
+                  </h1>
                 </div>
               </div>
             </header>
@@ -75,7 +97,10 @@ export default function Profile({ user, roomHistory }: { user: any; roomHistory:
         </div>
 
         <div className="flex justify-center space-x-4 mt-4">
-          <Button onClick={() => signOut({ callbackUrl: "/" })} variant="outline">
+          <Button
+            onClick={() => signOut({ callbackUrl: "/" })}
+            variant="outline"
+          >
             Sign Out
           </Button>
           <Button variant="destructive" onClick={() => setOpen(true)}>
@@ -88,7 +113,7 @@ export default function Profile({ user, roomHistory }: { user: any; roomHistory:
           <div className="border border-gray-200 rounded-lg p-4">
             {roomHistory && roomHistory.length > 0 ? (
               <ul className="space-y-2">
-                {roomHistory.map((room: any, index: number) => (
+                {roomHistory.map((room, index) => (
                   <li
                     key={index}
                     className="p-3 rounded-lg border-b last:border-none flex items-center justify-between"
@@ -121,7 +146,9 @@ export default function Profile({ user, roomHistory }: { user: any; roomHistory:
                 ))}
               </ul>
             ) : (
-              <p className="text-gray-500 text-center">No room history available.</p>
+              <p className="text-gray-500 text-center">
+                No room history available.
+              </p>
             )}
           </div>
         </section>
