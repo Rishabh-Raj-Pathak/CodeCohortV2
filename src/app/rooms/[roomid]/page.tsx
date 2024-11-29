@@ -12,7 +12,8 @@ export default async function RoomPage({
   params: { roomId: string };
 }) {
   unstable_noStore();
-
+  
+  console.log("params: ", params);
   const room = await getRoom(params.roomId);
 
   if (!room) {
