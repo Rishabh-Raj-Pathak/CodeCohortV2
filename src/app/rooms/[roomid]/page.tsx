@@ -5,16 +5,22 @@ import Link from "next/link";
 import { DevFinderVideo } from "./video-player";
 import { splitTags } from "@/lib/utils";
 import { unstable_noStore } from "next/cache";
-export default async function RoomPage({params} : { params: { roomId: string } })  {
+
+export default async function RoomPage({ params }: { params: { roomId: string } }) {
   unstable_noStore();
-  const props = await params;
-  const roomId = props.roomId;
 
-
+  const { roomId } = params;
   const room = await getRoom(roomId);
 
   if (!room) {
-    return <div>No room of this ID found</div>;
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen text-center">
+        <p className="text-lg font-semibold">No room of this ID found</p>
+        <Link href="/browse" className="text-blue-600 underline">
+          Go back to all rooms
+        </Link>
+      </div>
+    );
   }
 
   return (
@@ -27,25 +33,23 @@ export default async function RoomPage({params} : { params: { roomId: string } }
 
       <div className="col-span-1 p-4 pl-2">
         <div className="rounded-lg border bg-card text-card-foreground shadow-sm p-4 flex flex-col gap-4">
-          <h1 className="text-base">{room?.name || "Untitled room"}</h1>
+          <h1 className="text-lg font-bold">{room?.name || "Untitled Room"}</h1>
 
           {room.githubRepo && (
             <Link
               href={room.githubRepo}
-              className="flex items-center gap-2 text-center text-sm"
+              className="flex items-center gap-2 text-sm text-blue-600"
               target="_blank"
               rel="noopener noreferrer"
             >
               <GithubIcon />
-              Github Project
+              <span>Github Project</span>
             </Link>
           )}
 
-          <p className="text-base text-gray-600">
-            {room?.description || "untitled descp"}
-          </p>
+          <p className="text-sm text-gray-600">{room?.description || "No description provided."}</p>
 
-          <TagsList tags={splitTags(room.tags || "untitle tags h bhai")} />
+          <TagsList tags={splitTags(room.tags || "")} />
         </div>
       </div>
     </div>
