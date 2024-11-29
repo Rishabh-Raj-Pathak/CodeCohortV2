@@ -6,11 +6,14 @@ import { DevFinderVideo } from "./video-player";
 import { splitTags } from "@/lib/utils";
 import { unstable_noStore } from "next/cache";
 
-export default async function RoomPage({ params }: { params: { roomId: string } }) {
+export default async function RoomPage({
+  params,
+}: {
+  params: { roomId: string };
+}) {
   unstable_noStore();
 
-  const { roomId } = params;
-  const room = await getRoom(roomId);
+  const room = await getRoom(params.roomId);
 
   if (!room) {
     return (
@@ -47,7 +50,9 @@ export default async function RoomPage({ params }: { params: { roomId: string } 
             </Link>
           )}
 
-          <p className="text-sm text-gray-600">{room?.description || "No description provided."}</p>
+          <p className="text-sm text-gray-600">
+            {room?.description || "No description provided."}
+          </p>
 
           <TagsList tags={splitTags(room.tags || "")} />
         </div>
