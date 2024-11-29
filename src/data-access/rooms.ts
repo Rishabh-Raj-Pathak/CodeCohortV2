@@ -26,7 +26,7 @@ export async function getUserRooms() {
 }
 
 export async function getRoom(roomId: string) {
-  console.log(roomId)
+  console.log("roomId: ",roomId)
   if (!roomId) {
     throw new Error("Invalid roomId");
   }
