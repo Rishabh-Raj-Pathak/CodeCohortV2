@@ -20,60 +20,73 @@ import { useRouter } from "next/navigation";
 const apiKey = process.env.NEXT_PUBLIC_GET_STREAM_API_KEY!;
 
 export function DevFinderVideo({ room }: { room: Room }) {
-  const session = useSession();
-  const [videoclient, setvideoClient] = useState<StreamVideoClient | null>(null);
+  const { data: session } = useSession();
+  const [videoclient, setVideoClient] = useState<StreamVideoClient | null>(null);
   const [call, setCall] = useState<Call | null>(null);
   const router = useRouter();
 
-  
   useEffect(() => {
-    if (!room) return;
-    if (!session.data) {
+    if (!room || !session) {
+      console.error("Room or session is invalid");
       return;
     }
-    const userId = session.data.user.id;
-    const vclient = new StreamVideoClient({
-      apiKey,
-      user: {
-        id: userId,
-        name: session.data.user.name ?? undefined,
-        image: session.data.user.image ?? undefined,
-      },
-      tokenProvider: () => generateTokenAction(),
-    });
-    const call = vclient.call("default", room.id);
-    call.join({ create: true });
-    setvideoClient(vclient);
-    setCall(call);
-    
-    if (!session.data) {
+
+    if (!apiKey) {
+      console.error("API Key is missing");
       return;
     }
-    
-    return () => {
-      call
-        .leave()
-        .then(() => vclient.disconnectUser())
-        .catch(console.error);
+
+    const initializeVideo = async () => {
+      try {
+        const userId = session.user.id;
+        const vclient = new StreamVideoClient({
+          apiKey,
+          user: {
+            id: userId,
+            name: session.user.name ?? undefined,
+            image: session.user.image ?? undefined,
+          },
+          tokenProvider: () => generateTokenAction(),
+        });
+
+        const call = vclient.call("default", room.id);
+        await call.join({ create: true });
+        setVideoClient(vclient);
+        setCall(call);
+      } catch (error) {
+        console.error("Error initializing video client:", error);
+      }
     };
-  }, [session, room]);
+
+    initializeVideo();
+
+    return () => {
+      if (call && videoclient) {
+        call
+          .leave()
+          .then(() => videoclient.disconnectUser())
+          .catch((err) => console.error("Error during cleanup:", err));
+      }
+    };
+  }, [room, session]);
+
+  if (!videoclient || !call) {
+    return <div>Loading video...</div>;
+  }
 
   return (
-    videoclient  &&
-    call && (
-        <StreamVideo client={videoclient}>
-          <StreamTheme>
-            <StreamCall call={call}>
-              <SpeakerLayout />
-              <CallControls
-                onLeave={() => {
-                  router.push("/");
-                }}
-              />
-              <CallParticipantsList onClose={() => undefined} />
-            </StreamCall>
-          </StreamTheme>
-        </StreamVideo>
-    )
+    <StreamVideo client={videoclient}>
+      <StreamTheme>
+        <StreamCall call={call}>
+          <SpeakerLayout />
+          <CallControls
+            onLeave={() => {
+              router.push("/");
+            }}
+          />
+          <CallParticipantsList onClose={() => undefined} />
+        </StreamCall>
+      </StreamTheme>
+    </StreamVideo>
   );
 }
