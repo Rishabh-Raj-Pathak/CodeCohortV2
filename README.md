@@ -24,9 +24,13 @@ A platform designed specifically for developers to collaborate on projects, simi
 
 This platform is a collaborative environment where developers can create and join rooms to discuss and work on various projects. By integrating GitHub and offering features like tag-based searches and room recommendations, it aims to foster collaboration and enhance project development. With security features like password encryption and interest-based suggestions, the platform ensures a safe and efficient workspace for developers.
 
-![Browsing Rooms](screenshots/home1.png)
-![Browsing Rooms](screenshots/home2.png)
-![Browsing Rooms](screenshots/home3.png)
+![Home page](screenshots/home1.png)
+
+
+![Home Page](screenshots/home2.png)
+
+
+![Home Page](screenshots/home3.png)
 
 ---
 
@@ -37,6 +41,11 @@ This platform is a collaborative environment where developers can create and joi
 - **GitHub Integration**: Developers can create a room by pasting the link of their GitHub project, automatically associating the project with the room.
   
 - **Tags**: Users can add relevant tags to describe the technologies, frameworks, and languages used in the project (e.g., `React`, `Node.js`, `Python`).
+
+![Creating Rooms](screenshots/create-room.png)
+
+![Creating Rooms](screenshots/video2.png)
+
 
 ### Browsing Rooms
 
@@ -49,20 +58,31 @@ This platform is a collaborative environment where developers can create and joi
   
 - **Room Locking**: Users can lock rooms with a password, and those attempting to join must enter the correct password to access the room.
 
+![Browsing Rooms](screenshots/browse-room.png)
+
+
 ### Searching Rooms by Tags
 
 - **Tag-Based Search**: Developers can search for rooms using specific tags (e.g., a tech stack like `React` or `Machine Learning`).
   
 - **Search Results**: The platform displays a list of rooms that match the selected search criteria.
 
+![Searching Rooms by Tags](screenshots/tag-search.png)
+
+
 ### Room Recommendations
 
 - **Interest-Based Suggestions**: The platform suggests rooms based on users' interests and past activities to enhance collaboration and engagement.
+
+![Room Recommendations](screenshots/recommended.png)
 
 ### User Profile
 
 - **Room History**: Users can view a history of all the rooms they've joined or created.
 - **Project Contributions**: Users can see a list of their contributions to various projects within the platform.
+
+![User Profile](screenshots/user-profile.png)
+
 
 ---
 
