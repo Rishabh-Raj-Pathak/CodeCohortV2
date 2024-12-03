@@ -24,8 +24,9 @@ A platform designed specifically for developers to collaborate on projects, simi
 
 This platform is a collaborative environment where developers can create and join rooms to discuss and work on various projects. By integrating GitHub and offering features like tag-based searches and room recommendations, it aims to foster collaboration and enhance project development. With security features like password encryption and interest-based suggestions, the platform ensures a safe and efficient workspace for developers.
 
-![Browsing Rooms](screenshots/browse-room.png)
-
+![Browsing Rooms](screenshots/home1.png)
+![Browsing Rooms](screenshots/home2.png)
+![Browsing Rooms](screenshots/home3.png)
 
 ---
 
